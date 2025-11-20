@@ -1,11 +1,11 @@
 # DOCUMENTACIÓN COMPLETA: SmartRoute Event - Grafos
 # Proyecto: SmartRoute Event (Versión 3 - Grafos)
 
-# Integrantes:
-# Sergio Andres Martinez Cifuentes 2242039
-# Andres Felipe Guaqueta Rojas 2242034
-# Andres Sebastian Pinzon Gutierrez 2221887
-# Daniel Eduardo Rincon Arias 2202316
+## Integrantes:
+## Sergio Andres Martinez Cifuentes 2242039
+## Andres Felipe Guaqueta Rojas 2242034
+## Andres Sebastian Pinzon Gutierrez 2221887
+## Daniel Eduardo Rincon Arias 2202316
 
 ## Explicación del Flujo y Conexión entre `grafo.py` y `ejemplo.py`
 
@@ -275,7 +275,6 @@ S1 ←→ C1 (0.6 km)
 **Nodo Eliminado:**
 ```
 H1: "Hotel Mirador del Sol", 1.2, "Hotel".
-
 ```
 
 **Conexiones Eliminadas:**
@@ -287,7 +286,7 @@ H1 ←→ C1 (1.0 km)
 ```
 
 ```
----
+```
 
 ###  BLOQUE PRINCIPAL (`if __name__ == "__main__"`)
 
@@ -310,8 +309,10 @@ Calcula distancias mínimas desde un lugar específico.
 
 #### PASO 6: Reconstrucción de ruta
 Muestra el camino más corto completo con detalles.
+```
 
----
+
+```
 
 ##  FLUJO DE EJECUCIÓN
 
