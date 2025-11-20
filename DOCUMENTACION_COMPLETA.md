@@ -61,7 +61,7 @@ class Nodo:
 **Ejemplo:**
 ```python
 nodo = Nodo("P1", "Panadería La Delicia", 0.8, "Snack")
-print(nodo)  # Salida: Nodo(P1, Panadería La Delicia, Snack)
+print(nodo)  # Salida: Nodo(P1, Panadería La Delicia, 0.8, Snack)
 ```
 
 ---
