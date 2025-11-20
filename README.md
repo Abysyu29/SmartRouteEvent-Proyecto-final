@@ -5,7 +5,7 @@
 Se requiere modelar una red de lugares y rutas (por ejemplo, un sistema de logística o rutas urbanas) mediante estructuras de datos. El proyecto presenta tres etapas: 
 1. **Listas enlazadas** (entrega 1) — estructura básica y manipulación lineal.
 2. **Árboles** (entrega 2) — organización jerárquica y búsquedas eficientes para ciertos casos.
-3. **Grafos** (entrega 3) — modelado general de redes con rutas ponderadas (distancia/tiempo) y algoritmos de caminos mínimos.
+3. **Grafos** (entrega 3) — modelado general de redes con rutas ponderadas (distancia) y algoritmos de caminos mínimos.
 
 El objetivo final es comparar las implementaciones y concluir cuál es la más eficiente para el contexto de optimización de rutas.
 

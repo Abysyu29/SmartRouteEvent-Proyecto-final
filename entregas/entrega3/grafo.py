@@ -26,7 +26,7 @@ class Nodo:
     """
     
     def __init__(self, node_id: str, nombre: str, distancia_km: float,
-                 tiempo_str: str, categoria: str, meta: Optional[Dict[str,Any]]=None):
+                    categoria: str, meta: Optional[Dict[str,Any]]=None):
         """
         Inicializa un nodo con sus atributos principales.
         
@@ -34,14 +34,12 @@ class Nodo:
             node_id (str): Identificador único del nodo (ej: "P1", "H1")
             nombre (str): Nombre del lugar (ej: "Panadería La Delicia")
             distancia_km (float): Distancia desde el punto de referencia en km
-            tiempo_str (str): Tiempo estimado de viaje (ej: "10 min caminando")
             categoria (str): Tipo de lugar (Hotel, Restaurante, Snack, Emergencia, etc.)
             meta (dict, opcional): Diccionario con información adicional del lugar
         """
         self.id = node_id
         self.nombre = nombre
         self.distancia_km = distancia_km
-        self.tiempo_str = tiempo_str
         self.categoria = categoria
         self.meta = meta or {}
 
@@ -56,7 +54,6 @@ class Nodo:
             "id": self.id,
             "nombre": self.nombre,
             "distancia_km": self.distancia_km,
-            "tiempo_str": self.tiempo_str,
             "categoria": self.categoria,
             **self.meta  # Incluye metadatos adicionales si existen
         }
@@ -81,7 +78,7 @@ class Grafo:
     
     Ejemplo de uso:
         g = Grafo(dirigido=False)
-        g.insertar_nodo(Nodo("P1", "Panadería", 0.8, "10 min", "Snack"))
+        g.insertar_nodo(Nodo("P1", "Panadería", 0.8, "Snack"))
         g.insertar_arista("P1", "R1", peso=0.6)
     """
     

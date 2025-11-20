@@ -42,7 +42,7 @@ Este proyecto implementa un **sistema de gestión de lugares cercanos** usando e
 ```python
 class Nodo:
     """Representa un lugar o punto de interés"""
-    def __init__(self, node_id, nombre, distancia_km, tiempo_str, categoria, meta=None):
+    def __init__(self, node_id, nombre, distancia_km, categoria, meta=None):
 ```
 
 **Propósito:** Almacenar información de un lugar individual.
@@ -51,7 +51,6 @@ class Nodo:
 - `id`: Identificador único (ej: "P1", "H1")
 - `nombre`: Nombre del lugar (ej: "Panadería La Delicia")
 - `distancia_km`: Distancia desde referencia (ej: 0.8 km)
-- `tiempo_str`: Estimación de tiempo (ej: "10 min caminando")
 - `categoria`: Tipo de lugar (Hotel, Restaurante, Snack, Emergencia)
 - `meta`: Diccionario para información adicional
 
@@ -61,7 +60,7 @@ class Nodo:
 
 **Ejemplo:**
 ```python
-nodo = Nodo("P1", "Panadería La Delicia", 0.8, "10 min caminando", "Snack")
+nodo = Nodo("P1", "Panadería La Delicia", 0.8, "Snack")
 print(nodo)  # Salida: Nodo(P1, Panadería La Delicia, Snack)
 ```
 
@@ -89,7 +88,7 @@ class Grafo:
 #### `insertar_nodo(nodo)`
 Agrega un nuevo lugar al sistema.
 ```python
-grafo.insertar_nodo(Nodo("P1", "Panadería", 0.8, "10 min", "Snack"))
+grafo.insertar_nodo(Nodo("P1", "Panadería", 0.8, "Snack"))
 # Resultado: El nodo "P1" se almacena y está disponible para conexiones
 ```
 
@@ -192,7 +191,7 @@ orden = grafo.dfs("P1")
 Encuentra la distancia mínima desde un nodo a todos los demás.
 
 **¿Cuándo usarlo?**
-- Encontrar la ruta más eficiente (menor distancia/tiempo)
+- Encontrar la ruta más eficiente (menor distancia)
 - Calcular distancias a múltiples destinos
 - Sistemas GPS, ruteo
 
@@ -249,19 +248,42 @@ nodos = grafo.listar_nodos()
 
 **Lugares cargados:**
 ```
+X → Usuario(0.0, Usuario)
 P1 → Panadería La Delicia (0.8 km, Snack)
 H1 → Hotel Mirador del Sol (1.2 km, Hotel)
 C1 → Clínica Central Norte (1.8 km, Emergencia)
 R1 → Restaurante El Sabor Local (2.4 km, Restaurante)
+S1 → Cafetería Central ( 0.8 km, Snack)
 ```
 
 **Conexiones creadas:**
 ```
+X ←→ R1 (2.4 km)
+X ←→ H1 (1.2 km)
+X ←→ C1 (1.8 km)
+X ←→ P1 (0.8 km)
+X ←→ S1 (0.8 km)
+
 P1 ←→ R1 (0.6 km)
 P1 ←→ H1 (0.5 km)
 H1 ←→ C1 (1.0 km)
 R1 ←→ C1 (1.6 km)
+S1 ←→ P1 (0.4 km)
+S1 ←→ C1 (0.6 km)
 ```
+
+**Nodo Eliminado:**
+```
+H1: "Hotel Mirador del Sol", 1.2, "Hotel".
+
+```
+
+**Conexiones Eliminadas:**
+```
+X ←→ C1 (1.8 km)
+X ←→ H1 (1.2 km)
+P1 ←→ H1 (0.5 km)
+H1 ←→ C1 (1.0 km)
 
 ---
 
@@ -313,22 +335,31 @@ Insertar Nodos  Insertar     Retorna
 └─────────────────────────────────────────────────┘
     │
     ├─→ listar_nodos()
-    │   (Muestra: P1, H1, C1, R1)
+    │   (Muestra: X, P1, H1, C1, R1)
     │
     ├─→ listar_adyacencias()
     │   (Muestra conexiones)
     │
-    ├─→ bfs("P1")
-    │   (Busca amplitud: [P1, R1, H1, C1])
+    ├─→ bfs("X")
+    │   (Busca amplitud: [X, C1, H1, P1, R1])
     │
-    ├─→ dfs("P1")
-    │   (Busca profundidad: [P1, R1, C1, H1])
+    ├─→ dfs("X")
+    │   (Busca profundidad: [X, C1, H1, P1, R1])
     │
-    ├─→ dijkstra("P1")
+    ├─→ dijkstra("X")
     │   (Calcula caminos mínimos)
     │
-    └─→ reconstruir_camino(prev, "C1")
-        (Muestra ruta: P1 → R1 → C1)
+    ├─→ reconstruir_camino(prev, "C1")
+    │   (Muestra ruta: X → C1)
+    │
+    ├─→ eliminar una arista (ejemplo)
+    │   (Muestra los datos anteriores con el cambio)
+    │
+    ├─→ eliminar un nodo (ejemplo)
+    │   (Muestra los datos anteriores con el cambio)
+    │
+    └─→ Insertar un nuevo nodo (ejemplo)
+        (Muestra los datos anteriores con el cambio)   
 ```
 
 ---
@@ -339,7 +370,7 @@ Insertar Nodos  Insertar     Retorna
 Estructura matemática compuesta por:
 - **Nodos (Vértices)**: Puntos o lugares
 - **Aristas (Edges)**: Conexiones entre nodos
-- **Peso**: Valor asociado a cada arista (distancia, tiempo, costo)
+- **Peso**: Valor asociado a cada arista (distancia)
 
 ### GRAFO DIRIGIDO vs NO DIRIGIDO
 - **Dirigido**: A→B no implica B→A (calles de un sentido)
@@ -401,8 +432,8 @@ print("Lugares accesibles desde P1:", cercanos)
 g = Grafo(dirigido=False)
 
 # Agregar lugares
-g.insertar_nodo(Nodo("A", "Lugar A", 1.0, "5 min", "Tipo1"))
-g.insertar_nodo(Nodo("B", "Lugar B", 2.0, "10 min", "Tipo2"))
+g.insertar_nodo(Nodo("A", "Lugar A", 1.0, "Tipo1"))
+g.insertar_nodo(Nodo("B", "Lugar B", 2.0, "Tipo2"))
 
 # Conectar
 g.insertar_arista("A", "B", peso=1.5)
