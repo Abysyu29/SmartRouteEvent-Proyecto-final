@@ -286,9 +286,10 @@ H1 ←→ C1 (1.0 km)
 ```
 
 ```
-```
 
+```
 ###  BLOQUE PRINCIPAL (`if __name__ == "__main__"`)
+
 
 Ejecuta una demostración completa del sistema:
 
