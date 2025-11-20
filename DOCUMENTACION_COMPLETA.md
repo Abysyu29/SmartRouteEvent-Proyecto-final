@@ -284,7 +284,9 @@ X ←→ C1 (1.8 km)
 X ←→ H1 (1.2 km)
 P1 ←→ H1 (0.5 km)
 H1 ←→ C1 (1.0 km)
+```
 
+```
 ---
 
 ###  BLOQUE PRINCIPAL (`if __name__ == "__main__"`)
